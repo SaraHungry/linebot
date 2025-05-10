@@ -25,7 +25,8 @@ class BaseTool(ABC):
         return "".join(["_" + c.lower() if c.isupper() else c for c in name]).lstrip(
             "_"
         )
-
+    
+    # TODO(?): add validator to make sure _get_tool_params returns in openai's required format
     @abstractmethod
     def _get_tool_parameters(self) -> Dict:
         """Returns the parameter schema for the tool.
