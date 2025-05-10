@@ -7,6 +7,9 @@ from tools.base_tool import BaseTool
 
 LOOP_LIMIT = 3
 
+# TODO: make tool call work for sync and async
+# TODO(?): consider maintaining error message with const or conf?
+
 class Agent:
     def __init__(self, system_prompt: str, model_name: str):
         """

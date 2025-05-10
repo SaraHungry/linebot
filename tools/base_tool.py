@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict
 
 
+# TODO: make tool call work for sync and async
 class BaseTool(ABC):
     """Abstract base class for all chatbot tools."""
 

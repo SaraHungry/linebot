@@ -6,6 +6,7 @@ import requests
 from tools.base_tool import BaseTool
 
 
+# TODO: make call work for sync and async
 class DadJokeTool(BaseTool):
     """Tells a random dad joke fetched from icanhazdadjoke.com."""
 
