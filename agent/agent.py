@@ -9,6 +9,7 @@ LOOP_LIMIT = 3
 
 # TODO: make tool call work for sync and async
 # TODO(?): consider maintaining error message with const or conf?
+# TODO: add logging
 
 class Agent:
     def __init__(self, system_prompt: str, model_name: str):
