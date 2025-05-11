@@ -42,7 +42,7 @@ def handle_line_webhook(request: Request):
         print(f"Error parsing webhook: {e}")
         return 'Error parsing webhook', 400
 
-    agent = Agent() # Initialize your agent with the defined tools
+    agent = Agent()
     agent.register_tool(DadJokeTool())
 
     for event in events:
@@ -51,10 +51,8 @@ def handle_line_webhook(request: Request):
                 user_message = event.message.text
                 reply_token = event.reply_token
 
-                # Pass the user message to the agent and get the response
                 agent_response = agent.run(user_message)
 
-                # Send the response back to LINE using the SDK
                 try:
                     line_bot_api.reply_message(
                         reply_token,
@@ -64,24 +62,3 @@ def handle_line_webhook(request: Request):
                     print(f"Error sending reply message: {e}")
 
     return 'OK', 200
-
-if __name__ == '__main__':
-    # Local testing with Flask remains the same
-
-
-    from flask import Flask
-    from flask import request as flask_request
-
-    from linebot.models import TextSendMessage
-
-    app = Flask(__name__)
-
-    @app.route('/', methods=['POST'])
-    def local_test_webhook():
-        return handle_line_webhook(flask_request)
-
-    # Set environment variables for local testing
-    os.environ["LINE_CHANNEL_ACCESS_TOKEN"] = "YOUR_CHANNEL_ACCESS_TOKEN"
-    os.environ["LINE_CHANNEL_SECRET"] = "YOUR_CHANNEL_SECRET"
-
-    app.run(host='0.0.0.0', port=8080, debug=True)

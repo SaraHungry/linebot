@@ -1,4 +1,4 @@
-from flask import Request  # Import Flask's Request for type hinting
+from flask import Request
 
 from chatbot import handle_line_webhook
 

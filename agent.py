@@ -119,7 +119,7 @@ class Agent:
                 response_message = response["choices"][0]["message"]
 
                 if response_message.get("tool_calls"):
-                    messages.append(response_message)  # Assistant's tool call
+                    messages.append(response_message)
                     tool_calls = response_message["tool_calls"]
                     self._get_tool_call_results(tool_calls, messages)
                 else:
@@ -127,7 +127,7 @@ class Agent:
             else:
                 return "call depth exceeded"
 
-        except Exception as e:  # Catch general exceptions from litellm
+        except Exception as e:
             print(f"LiteLLM Error: {e}")
             return "An error occurred while processing your request."
 
