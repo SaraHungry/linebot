@@ -9,6 +9,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextSendMessage
 from tools.dad_joke import DadJokeTool
 
+BOTNAME = "TinyRo"
 
 @lru_cache(maxsize=1)
 def get_line_config():
@@ -51,12 +52,13 @@ def handle_line_webhook(request: Request):
                 user_message = event.message.text
                 reply_token = event.reply_token
 
-                agent_response = agent.run(user_message)
+                if f"@{BOTNAME}" not in user_message:
+                    return
 
                 try:
                     line_bot_api.reply_message(
                         reply_token,
-                        TextSendMessage(text=agent_response)
+                        TextSendMessage(text=agent.generate_response([user_message]))
                     )
                 except Exception as e:
                     print(f"Error sending reply message: {e}")
